@@ -15,4 +15,8 @@ public class UserRepository {
     public List<User> findAll() {
         return entityManager.createQuery("select u from User u", User.class).getResultList();
     }
+
+    public User findById(Integer id){
+        return entityManager.find(User.class,id);
+    }
 }

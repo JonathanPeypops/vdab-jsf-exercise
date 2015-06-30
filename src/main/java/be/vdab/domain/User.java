@@ -17,6 +17,8 @@ public class User {
 
     private String birthDate;
 
+    private String fullName;
+
     /**
      * Used by JPA.
      */
@@ -59,5 +61,9 @@ public class User {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public String getName() {
+        return firstName + " " + lastName;
     }
 }
