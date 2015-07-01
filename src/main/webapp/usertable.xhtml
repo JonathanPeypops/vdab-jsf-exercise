@@ -7,15 +7,19 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="application/javascript" src="bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
-    <script type="application/javascript"
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 
     <link rel="stylesheet" href="fortune.css"/>
     <title></title>
 </h:head>
 <h:body>
+    <script>$('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').focus()
+    })</script>
     <div class="container">
         <h:dataTable value="#{userRepository.findAll()}" var="user" styleClass="table table-striped">
             <h:column>
@@ -43,9 +47,72 @@
                 <h:outputText value="#{user.gender}"/>
             </h:column>
 
+            <h:column>
+                <!-- Button trigger modal -->
+                <h:link outcome="#myModal" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                    <span class="glyphicon glyphicon-cog">EDIT</span>
+                    <f:param name="id" value="#{user.id}"></f:param>
+                </h:link>
+            </h:column>
         </h:dataTable>
+
         <div>
-            <a href="create.faces" class="btn btn-danger">ADD</a>
+            <h:link outcome="create" class="btn btn-danger"><span class="glyphicon glyphicon-user"></span> ADD</h:link>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true"></span></button>
+                            <h4 class="modal-title" id="myModalLabel">Edit user</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">First name</label>
+
+                                <div class="col-md-10">
+                                    <h:inputText id="firstName" value="#{userBean.newuser.firstName}"
+                                                 class="form-control"
+                                                 placeholder="First name"/>
+                                </div>
+
+
+                                <label class="col-md-2 control-label">Last name</label>
+
+                                <div class="col-md-10">
+                                    <h:inputText id="lastName" value="#{userBean.newuser.lastName}" class="form-control"
+                                                 placeholder="Last name"/>
+                                </div>
+
+                                <label class="col-md-2 control-label">Birthdate</label>
+
+                                <div class="col-md-10">
+                                    <h:inputText id="birthDate" value="#{userBean.newuser.birthDate}"
+                                                 class="form-control"
+                                                 placeholder="First name"/>
+                                </div>
+
+                                <label class="col-md-2 control-label">Gender</label>
+
+
+                                <div class="col-md-10 control-label">
+                                    <h:selectOneRadio value="#{userBean.newuser.gender}">
+                                        <f:selectItem itemLabel="MALE" itemValue="male"/>
+                                        <f:selectItem itemLabel="FEMALE" itemValue="female"/>
+                                    </h:selectOneRadio>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </h:body>

@@ -31,6 +31,7 @@
                                  placeholder="First name"/>
                 </div>
 
+
                 <label class="col-md-2 control-label">Last name</label>
 
                 <div class="col-md-10">
@@ -47,14 +48,16 @@
 
                 <label class="col-md-2 control-label">Gender</label>
 
-                <div>
+
+                <div class="col-md-10 control-label">
                     <h:selectOneRadio value="#{userBean.newuser.gender}">
-                        <f:selectItem itemLabel="MALE" value="male"/>
-                        <f:selectItem itemLabel="FEMALE" value="female"/>
+                        <f:selectItem itemLabel="MALE" itemValue="male"/>
+                        <f:selectItem itemLabel="FEMALE" itemValue="female"/>
                     </h:selectOneRadio>
                 </div>
 
-                <h:commandButton value="Submit" class="btn btn-primary" action="#{userBean.submitUser()}"/>
+                <div class="col-md-12 control-label">  <h:commandButton value="Submit" class="btn btn-primary " action="#{userBean.submitUser()}"/></div>
+                <div class="col-md-6"></div> <div class="col-md-6"> <h:link outcome="usertable" class="glyphicon glyphicon-th-list">View users</h:link></div>
             </div>
         </div>
     </h:form>
