@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Past;
+import java.util.Date;
 
 @Entity
 public class User {
@@ -15,7 +17,8 @@ public class User {
 
     private String lastName;
 
-    private String birthDate;
+    @Past
+    private Date birthDate;
 
     private String fullName;
 
@@ -28,7 +31,7 @@ public class User {
     }
 
 
-    public User(String firstName, String lastName, String birthDate, String gender) {
+    public User(String firstName, String lastName, Date birthDate, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -59,11 +62,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -74,4 +77,6 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+
 }

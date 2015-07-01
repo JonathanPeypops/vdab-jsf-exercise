@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <script type="application/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -42,9 +42,12 @@
                 <label class="col-md-2 control-label">Birthdate</label>
 
                 <div class="col-md-10">
-                    <h:inputText id="birthDate" value="#{userBean.newuser.birthDate}" class="form-control"
-                                 placeholder="First name"/>
+                    <h:inputText id="birthDate" value="#{userBean.newuser.birthDate}" converterMessage="Invalid input please enter a date! Example 2015-07-01" class="form-control"
+                                 placeholder="First name">
+                    <f:convertDateTime pattern="y-MM-dd" id="date"/>
+                    </h:inputText>
                 </div>
+                <span><h:message class="btn btn-warning" for="birthDate"/></span>
 
                 <label class="col-md-2 control-label">Gender</label>
 

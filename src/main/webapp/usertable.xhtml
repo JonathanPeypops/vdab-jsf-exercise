@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <script type="application/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -22,42 +22,54 @@
     })</script>
     <div class="container">
         <h:dataTable value="#{userRepository.findAll()}" var="user" styleClass="table table-striped">
-            <h:column>
+            <h:column class="col-md-1">
                 <f:facet name="header">ID</f:facet>
                 <h:outputText value="#{user.id}"/>
             </h:column>
 
-            <h:column>
+            <h:column class="col-md-2">
                 <f:facet name="header">First name</f:facet>
                 <h:outputText value="#{user.firstName}"/>
             </h:column>
 
-            <h:column>
+            <h:column class="col-md-2">
                 <f:facet name="header">Last name</f:facet>
                 <h:outputText value="#{user.lastName}"/>
             </h:column>
 
-            <h:column>
+            <h:column class="col-md-2">
                 <f:facet name="header">Birthdate</f:facet>
-                <h:outputText value="#{user.birthDate}"/>
+                <h:outputText value="#{user.birthDate}">
+                <f:convertDateTime pattern="y-MM-dd"/>
+                </h:outputText>
             </h:column>
 
-            <h:column>
+            <h:column class="col-md-1">
                 <f:facet name="header">Gender</f:facet>
                 <h:outputText value="#{user.gender}"/>
             </h:column>
 
+
             <h:column>
                 <!-- Button trigger modal -->
-                <h:link outcome="#myModal" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-                    <span class="glyphicon glyphicon-cog">EDIT</span>
-                    <f:param name="id" value="#{user.id}"></f:param>
+                <h:link outcome="#myModal" type="button" class="btn btn-success" data-toggle="modal"
+                        data-target="#myModal">
+                    <span class="glyphicon glyphicon-cog"/>
+                    <f:param name="id" value="#{user.id}"/>
                 </h:link>
+            </h:column>
+            <h:column>
+                <h:form>
+                    <!-- Button trigger modal -->
+                    <h:commandLink action="#{userRepository.remove(user.id)}"
+                                   class=" glyphicon glyphicon-floppy-remove btn btn-danger"/>
+                </h:form>
             </h:column>
         </h:dataTable>
 
         <div>
-            <h:link outcome="create" class="btn btn-danger"><span class="glyphicon glyphicon-user"></span> ADD</h:link>
+            <h:link outcome="create" class="btn btn-danger"><span
+                    class="glyphicon glyphicon-user"/> ADD</h:link>
 
 
             <!-- Modal -->
@@ -83,7 +95,8 @@
                                 <label class="col-md-2 control-label">Last name</label>
 
                                 <div class="col-md-10">
-                                    <h:inputText id="lastName" value="#{userBean.newuser.lastName}" class="form-control"
+                                    <h:inputText id="lastName" value="#{userBean.newuser.lastName}"
+                                                 class="form-control"
                                                  placeholder="Last name"/>
                                 </div>
 
@@ -92,7 +105,7 @@
                                 <div class="col-md-10">
                                     <h:inputText id="birthDate" value="#{userBean.newuser.birthDate}"
                                                  class="form-control"
-                                                 placeholder="First name"/>
+                                                 placeholder="First name"><f:convertDateTime pattern="y-MM-dd" id="date"/></h:inputText>
                                 </div>
 
                                 <label class="col-md-2 control-label">Gender</label>
@@ -105,7 +118,8 @@
                                     </h:selectOneRadio>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                    </button>
                                     <button type="button" class="btn btn-primary">Save changes</button>
                                 </div>
                             </div>

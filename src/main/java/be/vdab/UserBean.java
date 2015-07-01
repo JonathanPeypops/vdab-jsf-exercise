@@ -28,5 +28,6 @@ public class UserBean {
         userRepository.addUser(newuser);
         return "usertable.faces";
     }
+
 }
 
