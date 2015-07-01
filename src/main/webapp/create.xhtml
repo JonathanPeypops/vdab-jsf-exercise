@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <script type="application/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -22,20 +22,39 @@
     <h:form>
         <div class="container">
             <h1> Register</h1>
+
             <div class="form-group">
                 <label class="col-md-2 control-label">First name</label>
 
                 <div class="col-md-10">
-                    <input type="text" class="form-control" placeholder="First name"/>
+                    <h:inputText id="firstName" value="#{userBean.newuser.firstName}" class="form-control"
+                                 placeholder="First name"/>
                 </div>
 
                 <label class="col-md-2 control-label">Last name</label>
 
                 <div class="col-md-10">
-                    <input type="text" class="form-control" placeholder="Last name"/>
+                    <h:inputText id="lastName" value="#{userBean.newuser.lastName}" class="form-control"
+                                 placeholder="Last name"/>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Register</button>
+                <label class="col-md-2 control-label">Birthdate</label>
+
+                <div class="col-md-10">
+                    <h:inputText id="birthDate" value="#{userBean.newuser.birthDate}" class="form-control"
+                                 placeholder="First name"/>
+                </div>
+
+                <label class="col-md-2 control-label">Gender</label>
+
+                <div>
+                    <h:selectOneRadio value="#{userBean.newuser.gender}">
+                        <f:selectItem itemLabel="MALE" value="male"/>
+                        <f:selectItem itemLabel="FEMALE" value="female"/>
+                    </h:selectOneRadio>
+                </div>
+
+                <h:commandButton value="Submit" class="btn btn-primary" action="#{userBean.submitUser()}"/>
             </div>
         </div>
     </h:form>

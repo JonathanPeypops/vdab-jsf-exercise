@@ -19,16 +19,20 @@ public class User {
 
     private String fullName;
 
+    private String gender;
+
     /**
      * Used by JPA.
      */
-    protected User() {
+    public User() {
     }
 
-    public User(String firstName, String lastName, String birthDate) {
+
+    public User(String firstName, String lastName, String birthDate, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.gender = gender;
     }
 
     public Integer getId() {
@@ -63,7 +67,11 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getName() {
-        return firstName + " " + lastName;
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
